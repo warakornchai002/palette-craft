@@ -214,18 +214,18 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-neutral-950 px-5 py-6 text-neutral-100 sm:px-8 lg:px-10">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <header className="flex flex-col gap-5 border-b border-white/10 pb-6 lg:flex-row lg:items-end lg:justify-between">
+    <main className="min-h-screen bg-neutral-950 px-4 py-5 text-neutral-100 sm:px-8 sm:py-6 lg:px-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-5 sm:gap-6">
+        <header className="flex flex-col gap-4 border-b border-white/10 pb-5 sm:gap-5 sm:pb-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.28em] text-cyan-300">Palette Craft</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-cyan-300 sm:text-sm">Palette Craft</p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-normal text-white sm:mt-3 sm:text-4xl lg:text-5xl">
               Build harmonious color systems.
             </h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex h-12 items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-sm text-neutral-300">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+            <label className="flex h-11 items-center gap-3 rounded-lg border border-white/10 bg-white/[0.04] px-3 text-sm text-neutral-300 sm:h-12">
               <span>Base</span>
               <input
                 aria-label="Base color"
@@ -239,27 +239,27 @@ export default function Home() {
             <button
               type="button"
               onClick={surpriseBase}
-              className="h-12 rounded-lg border border-white/10 bg-white/[0.06] px-4 text-sm font-medium text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10"
+              className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.06] px-4 text-sm font-medium text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10 sm:h-12 sm:w-auto"
             >
               Random Base
             </button>
             <button
               type="button"
               onClick={() => generatePalette()}
-              className="h-12 rounded-lg bg-cyan-300 px-5 text-sm font-semibold text-neutral-950 transition hover:bg-cyan-200"
+              className="h-11 w-full rounded-lg bg-cyan-300 px-5 text-sm font-semibold text-neutral-950 transition hover:bg-cyan-200 sm:h-12 sm:w-auto"
             >
               Generate
             </button>
           </div>
         </header>
 
-        <section className="grid gap-3 md:grid-cols-4" aria-label="Harmony mode">
+        <section className="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4" aria-label="Harmony mode">
           {modes.map((item) => (
             <button
               key={item.value}
               type="button"
               onClick={() => updateMode(item.value)}
-              className={`h-11 rounded-lg border px-4 text-sm font-medium transition ${
+              className={`h-10 rounded-lg border px-3 text-sm font-medium transition sm:h-11 sm:px-4 ${
                 mode === item.value
                   ? "border-cyan-300 bg-cyan-300 text-neutral-950"
                   : "border-white/10 bg-white/[0.04] text-neutral-300 hover:border-white/30 hover:bg-white/[0.08]"
@@ -270,21 +270,21 @@ export default function Home() {
           ))}
         </section>
 
-        <section className="grid min-h-[430px] gap-4 lg:grid-cols-5" aria-label="Generated palette">
+        <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-5" aria-label="Generated palette">
           {palette.map((swatch, index) => (
             <article
               key={`${swatch.hex}-${index}`}
-              className="flex min-h-72 flex-col justify-between overflow-hidden rounded-lg border border-white/10 shadow-2xl shadow-black/30 lg:min-h-[520px]"
+              className="flex min-h-48 flex-col justify-between overflow-hidden rounded-lg border border-white/10 shadow-2xl shadow-black/30 sm:min-h-64 lg:min-h-[520px]"
               style={{ backgroundColor: swatch.hex, color: readableTextColor(swatch.hex) }}
             >
-              <div className="flex items-center justify-between p-4">
-                <span className="rounded-md bg-black/25 px-3 py-1 text-xs font-semibold backdrop-blur">
+              <div className="flex items-center justify-between p-3 sm:p-4">
+                <span className="rounded-md bg-black/25 px-2 py-1 text-xs font-semibold backdrop-blur sm:px-3">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <button
                   type="button"
                   onClick={() => toggleLock(index)}
-                  className="rounded-md bg-black/25 px-3 py-1 text-xs font-semibold backdrop-blur transition hover:bg-black/40"
+                  className="rounded-md bg-black/25 px-2 py-1 text-xs font-semibold backdrop-blur transition hover:bg-black/40 sm:px-3"
                   aria-pressed={swatch.locked}
                 >
                   {swatch.locked ? "Locked" : "Lock"}
@@ -294,11 +294,11 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => copyHex(swatch.hex)}
-                className="mt-auto flex w-full flex-col items-start gap-2 bg-black/25 p-5 text-left backdrop-blur transition hover:bg-black/35"
+                className="mt-auto flex w-full flex-col items-start gap-1 bg-black/25 p-3 text-left backdrop-blur transition hover:bg-black/35 sm:gap-2 sm:p-5"
                 aria-label={`Copy ${swatch.hex}`}
               >
-                <span className="font-mono text-3xl font-semibold">{swatch.hex}</span>
-                <span className="font-mono text-sm opacity-85">RGB {swatch.rgb}</span>
+                <span className="font-mono text-xl font-semibold sm:text-3xl">{swatch.hex}</span>
+                <span className="font-mono text-xs opacity-85 sm:text-sm">RGB {swatch.rgb}</span>
                 <span className="text-xs font-semibold uppercase tracking-[0.18em] opacity-80">
                   {copiedHex === swatch.hex ? "Copied" : "Click to copy"}
                 </span>
@@ -308,41 +308,41 @@ export default function Home() {
         </section>
 
         <section className="grid gap-4 lg:grid-cols-[1fr_420px]">
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold text-white">CSS Variables</h2>
+          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-4 sm:p-5">
+            <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
+              <h2 className="text-base font-semibold text-white sm:text-lg">CSS Variables</h2>
               <button
                 type="button"
                 onClick={copyCss}
-                className="rounded-lg border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-medium text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10"
+                className="rounded-lg border border-white/10 bg-white/[0.06] px-3 py-2 text-sm font-medium text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10 sm:px-4"
               >
                 {copiedHex === "CSS" ? "Copied" : "Copy CSS"}
               </button>
             </div>
-            <pre className="max-h-72 overflow-auto rounded-lg bg-neutral-950 p-4 text-sm leading-6 text-cyan-100">
+            <pre className="max-h-60 overflow-auto rounded-lg bg-neutral-950 p-3 text-xs leading-6 text-cyan-100 sm:max-h-72 sm:p-4 sm:text-sm">
               <code>{cssVariables}</code>
             </pre>
           </div>
 
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
-            <h2 className="text-lg font-semibold text-white">Current Palette</h2>
-            <div className="mt-4 grid grid-cols-5 overflow-hidden rounded-lg border border-white/10">
+          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-4 sm:p-5">
+            <h2 className="text-base font-semibold text-white sm:text-lg">Current Palette</h2>
+            <div className="mt-3 grid grid-cols-5 overflow-hidden rounded-lg border border-white/10 sm:mt-4">
               {palette.map((swatch, index) => (
                 <button
                   key={`strip-${swatch.hex}-${index}`}
                   type="button"
                   onClick={() => copyHex(swatch.hex)}
-                  className="h-24 transition hover:scale-105"
+                  className="h-16 transition hover:scale-105 sm:h-24"
                   style={{ backgroundColor: swatch.hex }}
                   aria-label={`Copy ${swatch.hex}`}
                 />
               ))}
             </div>
-            <div className="mt-4 grid gap-2 text-sm text-neutral-300">
+            <div className="mt-3 grid gap-2 text-xs text-neutral-300 sm:mt-4 sm:text-sm">
               {palette.map((swatch, index) => (
-                <div key={`meta-${swatch.hex}-${index}`} className="flex items-center justify-between gap-3">
+                <div key={`meta-${swatch.hex}-${index}`} className="flex items-center justify-between gap-2 sm:gap-3">
                   <span className="font-mono">{swatch.hex}</span>
-                  <span className="font-mono text-neutral-500">rgb({swatch.rgb})</span>
+                  <span className="font-mono text-neutral-500 text-[11px] sm:text-sm">rgb({swatch.rgb})</span>
                 </div>
               ))}
             </div>
